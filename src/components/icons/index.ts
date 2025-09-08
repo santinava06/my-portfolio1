@@ -1,0 +1,13 @@
+export { default as ReactIcon } from './ReactIcon';
+export { default as NextJSIcon } from './NextJSIcon';
+export { default as TypeScriptIcon } from './TypeScriptIcon';
+export { default as JavaScriptIcon } from './JavaScriptIcon';
+export { default as NodeJSIcon } from './NodeJSIcon';
+export { default as TailwindIcon } from './TailwindIcon';
+export { default as HTMLIcon } from './HTMLIcon';
+export { default as CSSIcon } from './CSSIcon';
+export { default as GitIcon } from './GitIcon';
+export { default as VercelIcon } from './VercelIcon';
+export { default as GitHubIcon } from './GitHubIcon';
+export { default as LinkedInIcon } from './LinkedInIcon';
+export { default as EmailIcon } from './EmailIcon';
