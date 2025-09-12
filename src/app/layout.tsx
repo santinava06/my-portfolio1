@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     description: "Desarrollador web full stack especializado en React, Next.js, Node.js y TypeScript. Creo aplicaciones web modernas y escalables.",
     images: [
       {
-        url: "/images/og-image.jpg",
+        url: "/images/og-image.svg",
         width: 1200,
         height: 630,
         alt: "Santiago Navarro - Desarrollador Web",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Santiago Navarro - Desarrollador Web Full Stack",
     description: "Desarrollador web full stack especializado en React, Next.js, Node.js y TypeScript.",
-    images: ["/images/twitter-image.jpg"],
+    images: ["/images/twitter-image.svg"],
     creator: "@santinavarro_dev",
   },
   robots: {

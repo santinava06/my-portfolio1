@@ -1,76 +1,109 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { projects, Project } from "../../data/projects";
 import Link from "next/link";
-import AnimatedSection from "../../components/AnimatedSection";
+import Image from "next/image";
 
 export default function ProjectsPage() {
   const [filter, setFilter] = useState<string>("all");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const filteredProjects = filter === "all" 
     ? projects 
     : projects.filter(project => project.featured);
 
-  const ProjectCard = ({ project, index }: { project: Project; index: number }) => (
-    <AnimatedSection 
-      animation="fade-in" 
-      delay={index * 150}
-      className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover-lift transition-smooth"
-    >
-      <div className="h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-        <span className="text-gray-500 dark:text-gray-400 text-sm">
-          {project.image ? "Imagen del proyecto" : "Sin imagen"}
-        </span>
-      </div>
-      <div className="p-6">
-        <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          {project.description}
-        </p>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.technologies.map((tech) => (
-            <span
-              key={tech}
-              className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm rounded-full transition-smooth hover:scale-105"
-            >
-              {tech}
+  const ProjectCard = ({ project }: { project: Project; index: number }) => {
+    // Ensure technologies array is stable and sorted consistently
+    const sortedTechnologies = [...project.technologies].sort();
+    
+    return (
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover-lift transition-smooth">
+         <div className="relative h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            />
+          ) : (
+            <span className="text-gray-500 dark:text-gray-400 text-sm">
+              Sin imagen
             </span>
-          ))}
+          )}
         </div>
-        <div className="flex gap-3">
-          <Link
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 bg-black dark:bg-white text-white dark:text-black text-center py-2 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-200 transition-smooth"
-          >
-            Ver Demo
-          </Link>
-          <Link
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 border border-gray-300 dark:border-gray-600 text-center py-2 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-smooth"
-          >
-            Código
-          </Link>
+        <div className="p-6">
+          <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+          <p className="text-gray-600 dark:text-gray-300 mb-4">
+            {project.description}
+          </p>
+          <div className="flex flex-wrap gap-2 mb-4">
+            {sortedTechnologies.map((tech) => (
+              <span
+                key={tech}
+                className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm rounded-full transition-smooth hover:scale-105"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+          <div className="flex gap-3">
+            <Link
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 bg-black dark:bg-white text-white dark:text-black text-center py-2 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-200 transition-smooth"
+            >
+              Ver Demo
+            </Link>
+            <Link
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 border border-gray-300 dark:border-gray-600 text-center py-2 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-smooth"
+            >
+              Código
+            </Link>
+          </div>
         </div>
       </div>
-    </AnimatedSection>
-  );
+    );
+  };
+
+  // Prevent hydration mismatch by not rendering until mounted
+  if (!mounted) {
+    return (
+      <div className="max-w-6xl mx-auto px-4 py-12">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-6">Mis Proyectos</h1>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            Una colección de proyectos que he desarrollado, mostrando mis habilidades y experiencia
+          </p>
+        </div>
+        <div className="flex justify-center">
+          <div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-8 w-32 rounded"></div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
       {/* Header */}
-      <AnimatedSection animation="fade-in" className="text-center mb-16">
+      <div className="text-center mb-16">
         <h1 className="text-4xl sm:text-5xl font-bold mb-6">Mis Proyectos</h1>
         <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
           Una colección de proyectos que he desarrollado, mostrando mis habilidades y experiencia
         </p>
-      </AnimatedSection>
+      </div>
 
       {/* Filters */}
-      <AnimatedSection animation="slide-in-left" className="flex justify-center mb-12">
+      <div className="flex justify-center mb-12">
         <div className="flex bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
           <button
             onClick={() => setFilter("all")}
@@ -93,26 +126,26 @@ export default function ProjectsPage() {
             Destacados
           </button>
         </div>
-      </AnimatedSection>
+      </div>
 
       {/* Projects Grid */}
-      <AnimatedSection animation="fade-in" className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredProjects.map((project, index) => (
           <ProjectCard key={project.id} project={project} index={index} />
         ))}
-      </AnimatedSection>
+      </div>
 
       {/* Empty State */}
       {filteredProjects.length === 0 && (
-        <AnimatedSection animation="fade-in" className="text-center py-12">
+        <div className="text-center py-12">
           <p className="text-gray-600 dark:text-gray-400 text-lg">
             No hay proyectos que coincidan con el filtro seleccionado.
           </p>
-        </AnimatedSection>
+        </div>
       )}
 
       {/* CTA Section */}
-      <AnimatedSection animation="scale-in" className="text-center mt-16">
+      <div className="text-center mt-16">
         <h2 className="text-2xl font-bold mb-4">¿Tienes un proyecto en mente?</h2>
         <p className="text-gray-600 dark:text-gray-300 mb-8">
           Me encantaría escuchar sobre tu proyecto y ayudarte a hacerlo realidad.
@@ -123,7 +156,7 @@ export default function ProjectsPage() {
         >
           Hablemos
         </Link>
-      </AnimatedSection>
+      </div>
     </div>
   );
 } 
