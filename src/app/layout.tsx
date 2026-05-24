@@ -1,65 +1,42 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Inter } from "next/font/google";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "../styles/global.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import ParticlesBackground from "@/components/ParticlesBackground";
+import Header from "@/shared/components/layout/Header";
+import Footer from "@/shared/components/layout/Footer";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: {
     default: "Santiago Navarro - Desarrollador Web Full Stack",
-    template: "%s | Santiago Navarro"
+    template: "%s | Santiago Navarro",
   },
-  description: "Desarrollador web full stack especializado en React, Next.js, Node.js y TypeScript. Creo aplicaciones web modernas, escalables y con excelente UX. Disponible para proyectos freelance y colaboraciones.",
-  keywords: [
-    "desarrollador web",
-    "React",
-    "Next.js",
-    "TypeScript",
-    "Node.js",
-    "Tailwind CSS",
-    "JavaScript",
-    "full stack developer",
-    "frontend developer",
-    "backend developer",
-    "freelance developer",
-    "Tucumán",
-    "Argentina"
-  ],
+  description:
+    "Desarrollador web full stack especializado en React, Next.js, Node.js y TypeScript.",
   authors: [{ name: "Santiago Navarro", url: "https://santinavarro.dev" }],
-  creator: "Santiago Navarro",
-  publisher: "Santiago Navarro",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
   metadataBase: new URL("https://santinavarro.dev"),
-  alternates: {
-    canonical: "/",
-    languages: {
-      "es-ES": "/es",
-      "en-US": "/en",
-    },
-  },
   openGraph: {
     type: "website",
     locale: "es_ES",
     url: "https://santinavarro.dev",
     siteName: "Santiago Navarro - Portfolio",
     title: "Santiago Navarro - Desarrollador Web Full Stack",
-    description: "Desarrollador web full stack especializado en React, Next.js, Node.js y TypeScript. Creo aplicaciones web modernas y escalables.",
+    description:
+      "Desarrollador web full stack especializado en React, Next.js, Node.js y TypeScript.",
     images: [
       {
         url: "/images/og-image.svg",
@@ -72,25 +49,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Santiago Navarro - Desarrollador Web Full Stack",
-    description: "Desarrollador web full stack especializado en React, Next.js, Node.js y TypeScript.",
+    description:
+      "Desarrollador web full stack especializado en React, Next.js, Node.js y TypeScript.",
     images: ["/images/twitter-image.svg"],
-    creator: "@santinavarro_dev",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  verification: {
-    google: "your-google-verification-code",
-    yandex: "your-yandex-verification-code",
-    yahoo: "your-yahoo-verification-code",
   },
 };
 
@@ -109,74 +70,30 @@ export default function RootLayout({
                 try {
                   var theme = localStorage.getItem('theme');
                   var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  var shouldBeDark = theme === 'dark' || (!theme && prefersDark);
-                  
-                  if (shouldBeDark) {
+                  if (theme === 'dark' || (!theme && prefersDark)) {
                     document.documentElement.classList.add('dark');
-                  } else {
-                    document.documentElement.classList.remove('dark');
                   }
                 } catch (e) {}
               })();
             `,
           }}
         />
-        <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
-        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Santiago Navarro",
-              "jobTitle": "Desarrollador Web Full Stack",
-              "description": "Desarrollador web full stack especializado en React, Next.js, Node.js y TypeScript",
-              "url": "https://santinavarro.dev",
-              "image": "https://santinavarro.dev/images/profile.jpg",
-              "sameAs": [
-                "https://github.com/santinava06",
-                "https://www.linkedin.com/in/santinavarro-dev/",
-                "mailto:sncarp2003@gmail.com"
-              ],
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "San Miguel de Tucumán",
-                "addressRegion": "Tucumán",
-                "addressCountry": "AR"
-              },
-              "knowsAbout": [
-                "React",
-                "Next.js",
-                "TypeScript",
-                "Node.js",
-                "JavaScript",
-                "Tailwind CSS",
-                "Web Development",
-                "Frontend Development",
-                "Backend Development"
-              ],
-              "alumniOf": {
-                "@type": "EducationalOrganization",
-                "name": "Universidad del Norte Santo Tomas de Aquino"
-              }
-            })
-          }}
-        />
       </head>
       <body
-        className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white transition-colors duration-300`}
+        className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-black text-white`}
       >
-        <ParticlesBackground />
-        <div className="relative z-10">
+        <div className="fixed inset-0 bg-gradient-to-br from-blue-900/10 via-transparent to-purple-900/10 pointer-events-none" />
+        <div className="fixed top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-500/3 rounded-full blur-3xl pointer-events-none" />
+        <div className="fixed bottom-1/4 right-1/4 w-[500px] h-[500px] bg-purple-500/3 rounded-full blur-3xl pointer-events-none" />
+        <div className="relative z-10 flex flex-col min-h-screen">
           <Header />
-          <main className="pt-16">
-            {children}
-          </main>
+          <main className="flex-1">{children}</main>
           <Footer />
         </div>
       </body>
