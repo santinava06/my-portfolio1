@@ -41,8 +41,8 @@ export function ContactForm() {
             <p className="text-sm font-medium text-red-400">Error al enviar</p>
             <p className="text-xs text-red-400/60 mt-1">
               Intenta de nuevo o escribime directamente a{" "}
-              <a href="mailto:sncarp2003@gmail.com" className="underline">
-                sncarp2003@gmail.com
+              <a href="mailto:santnavarro08@gmail.com" className="underline">
+                santnavarro08@gmail.com
               </a>
             </p>
           </div>

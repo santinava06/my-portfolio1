@@ -13,7 +13,7 @@ const socialLinks = [
     icon: LinkedInIcon,
   },
   {
-    href: "mailto:sncarp2003@gmail.com",
+    href: "mailto:santnavarro08@gmail.com",
     label: "Email",
     icon: EmailIcon,
   },

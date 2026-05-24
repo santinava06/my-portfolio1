@@ -2,10 +2,16 @@ import emailjs from "@emailjs/browser";
 import { env } from "@/config/env";
 
 export interface EmailPayload {
+  title?: string;
   from_name: string;
   from_email: string;
+  reply_to?: string;
   subject: string;
+  project_type?: string;
   message: string;
+  raw_message?: string;
+  source_url?: string;
+  user_agent?: string;
 }
 
 export interface EmailResult {
@@ -29,6 +35,8 @@ export async function sendEmail(payload: EmailPayload): Promise<EmailResult> {
       templateId,
       {
         ...payload,
+        title: payload.title ?? "Nuevo mensaje desde el portfolio",
+        reply_to: payload.reply_to ?? payload.from_email,
         date: new Date().toLocaleString("es-ES", {
           year: "numeric",
           month: "long",

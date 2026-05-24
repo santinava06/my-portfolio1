@@ -19,17 +19,17 @@ export function validateContactForm(data: ContactFormData): ValidationErrors {
   if (!data.email.trim()) {
     errors.email = "El email es requerido";
   } else if (!emailRegex.test(data.email)) {
-    errors.email = "El email no es válido";
+    errors.email = "El email no es valido";
   }
 
   if (!data.subject.trim()) {
-    errors.subject = "El asunto es requerido";
+    errors.subject = "El tipo de proyecto es requerido";
   }
 
   if (!data.message.trim()) {
-    errors.message = "El mensaje es requerido";
-  } else if (data.message.trim().length < 10) {
-    errors.message = "El mensaje debe tener al menos 10 caracteres";
+    errors.message = "El contexto del proyecto es requerido";
+  } else if (data.message.trim().length < 20) {
+    errors.message = "Contame un poco mas sobre el proyecto";
   }
 
   return errors;

@@ -152,7 +152,7 @@ Este proyecto está bajo la Licencia MIT.
 
 ## 📞 Contacto
 
-- **Email**: sncarp2003@gmail.com
+- **Email**: santnavarro08@gmail.com
 - **LinkedIn**: [santinavarro-dev](https://www.linkedin.com/in/santinavarro-dev/)
 - **GitHub**: [santinava06](https://github.com/santinava06)
 

@@ -6,8 +6,8 @@ const contactDetails = [
   {
     icon: Mail,
     label: "Email",
-    value: "sncarp2003@gmail.com",
-    href: "mailto:sncarp2003@gmail.com",
+    value: "santnavarro08@gmail.com",
+    href: "mailto:santnavarro08@gmail.com",
   },
   {
     icon: MapPin,
